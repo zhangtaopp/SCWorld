@@ -1,0 +1,46 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName(), AROUTER_GENERATE_DOC: "enable"]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+    api rootProject.ext.supportDependencies.material
+    api rootProject.ext.supportDependencies.appcompat
+    api rootProject.ext.supportDependencies.constraintlayout
+    api rootProject.ext.supportDependencies.junit
+    api rootProject.ext.supportDependencies.jetbrains
+    api rootProject.ext.supportDependencies.arouter
+    api rootProject.ext.supportDependencies.gson
+    api rootProject.ext.supportDependencies.core_ktx
+    api rootProject.ext.supportDependencies.kotlin_stdlib_jdk7
+    api rootProject.ext.supportDependencies.butterknife
+    api rootProject.ext.supportDependencies.recyclerview
+    api rootProject.ext.supportDependencies.cardview
+    api rootProject.ext.supportDependencies.retrofit2
+    api rootProject.ext.supportDependencies.converter_gson
+    api rootProject.ext.supportDependencies.logging_interceptor
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+}
